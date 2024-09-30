@@ -5,20 +5,20 @@
 
     RewriteEngine On
 
-    # option to force redirect to ssl (https) - uncomment the two lines below
+    # Option to force redirect to SSL (HTTPS) - uncomment the two lines below
     # RewriteCond %{HTTPS} !=on    
     # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-    
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Handle Front Controller...
+    # Handle Front Controller (Pass everything except specific files to index.php)
     RewriteCond %{REQUEST_URI} !(\.css|\.js|\.svg|\.png|\.jpg|\.gif|robots\.txt|\.png|\.ttf|\.woff)$ [NC]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
